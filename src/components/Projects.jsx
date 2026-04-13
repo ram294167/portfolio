@@ -1,0 +1,458 @@
+import { motion, AnimatePresence } from 'framer-motion'
+import { useInView } from 'framer-motion'
+import { useRef, useState } from 'react'
+import { FiPlay, FiDownload, FiX, FiInfo } from 'react-icons/fi'
+
+// ─── ADD YOUR PROJECTS HERE ───────────────────────────────────────────────────
+const projects = [
+  {
+    title: 'CoreFix Partner',
+    company: 'CoreFix',
+    description:
+      'Service professional app for mechanics, plumbers & electricians. Auth — login, Google Sign-In, OTP-based password reset. Jobs — receive nearby requests with 30s timer, full lifecycle (accept → navigate → OTP complete). Location — live GPS tracking, Google Maps navigation. Earnings — wallet, payment history, bank withdrawal. Documents — uploads via AWS S3. Notifications — real-time push via FCM.',
+    tags: ['React Native', 'Node.js', 'Express', 'PostgreSQL', 'Firebase FCM', 'AWS S3', 'Google Maps', 'Google Auth'],
+    video: '',
+    apk: '/corefix-partner.apk',
+    details: {
+      how: 'Employee opens app → goes Online (toggles availability) → GPS starts tracking location to backend in real time. When a nearby job is created, FCM sends a push notification → a modal pops with 30s countdown. Employee accepts → job lifecycle begins: Start → Navigate → Reach → OTP complete. After completion, earnings are added to wallet.',
+      frontend: [
+        { module: 'React Native', why: 'Cross-platform mobile app — single codebase for Android' },
+        { module: 'React Navigation', why: 'Stack + Bottom Tab navigation between screens' },
+        { module: 'React Native Maps', why: 'Live map view, employee & customer location pins' },
+        { module: 'Geolocation API', why: 'Real-time GPS tracking, sent to backend while online' },
+        { module: 'Firebase FCM', why: 'Receive push notifications for job requests' },
+        { module: 'AsyncStorage', why: 'Persist auth token and user session locally' },
+        { module: 'Context API', why: 'Global state for active job and upcoming jobs' },
+        { module: 'Google Sign-In', why: 'OAuth login via Google account' },
+      ],
+      backend: [
+        { module: 'Node.js + Express', why: 'REST API server — handles all app requests' },
+        { module: 'PostgreSQL', why: 'Primary database — employees, jobs, earnings, transactions' },
+        { module: 'AWS S3', why: 'Store employee documents (KYC, ID proofs) securely' },
+        { module: 'Firebase Admin SDK', why: 'Send FCM push notifications to employee devices' },
+        { module: 'JWT', why: 'Token-based authentication for all API calls' },
+      ],
+      modules: [
+        { name: 'Auth', desc: 'Login, Google Sign-In, multi-step register, OTP password reset' },
+        { name: 'Jobs', desc: 'Nearby job requests, 30s accept timer, full job lifecycle with OTP completion' },
+        { name: 'Location', desc: 'Live GPS tracking while online, Google Maps navigation to customer' },
+        { name: 'Earnings', desc: 'Wallet balance, payment history, bank withdrawal with status tracking' },
+        { name: 'Documents', desc: 'KYC document upload to AWS S3, verification status' },
+        { name: 'Notifications', desc: 'FCM push notifications, in-app notification history' },
+        { name: 'Profile', desc: 'Edit profile, role & service management, settings' },
+      ],
+    },
+  },
+  {
+    title: 'CoreFix Admin Panel',
+    company: 'CoreFix',
+    description:
+      'Web-based admin dashboard for the CoreFix platform. Manages employees, jobs, payments, AMC contracts, services, offers, taxes, and push notifications. Role-based access control per staff member. Source code and live access are confidential.',
+    tags: ['React', 'Node.js', 'Express', 'PostgreSQL', 'FCM', 'AWS S3', 'REST API'],
+    video: '',
+    apk: '',
+    details: {
+      how: 'Admin logs in → accesses role-restricted modules based on permissions. Each module talks to the Node.js/Express REST API. Data is stored in PostgreSQL. Documents and images go to AWS S3. Push notifications are sent via Firebase FCM to employees or customers. Staff access is controlled per menu item through an RBAC system.',
+      frontend: [
+        { module: 'React', why: 'Component-based web UI — each module is an independent component' },
+        { module: 'React Router', why: 'Client-side routing between dashboard sections' },
+        { module: 'Recharts', why: 'Sales performance and overview charts on the dashboard' },
+        { module: 'SheetJS (XLSX)', why: 'Export reports — AMC customer reports, salary data — to Excel' },
+        { module: 'Lucide React', why: 'Icon library used across all components' },
+        { module: 'Context API', why: 'Global auth state and user session management' },
+      ],
+      backend: [
+        { module: 'Node.js + Express', why: 'REST API — all admin operations go through dedicated endpoints' },
+        { module: 'PostgreSQL', why: 'Primary database — users, jobs, payments, AMC, services, taxes' },
+        { module: 'AWS S3', why: 'Store employee documents (Aadhaar, PAN, DL) and service images' },
+        { module: 'Firebase Admin SDK', why: 'Send targeted or broadcast push notifications via FCM' },
+        { module: 'JWT', why: 'Token-based auth — role and permissions verified on every request' },
+      ],
+      modules: [
+        { name: 'Dashboard', desc: 'KPI cards (staff, employees, customers), sales chart with Today/Month/Year filter' },
+        { name: 'User Management', desc: 'Office staff, employees, customers — add, view, verify documents, manage status' },
+        { name: 'Jobs', desc: 'All service requests across 6 statuses — assign employees, track progress' },
+        { name: 'AMC Management', desc: 'Annual maintenance contracts — plans, assignments, discount rules, customer reports' },
+        { name: 'Service Catalog', desc: 'Category → Subcategory → Service hierarchy with images, pricing, capacity' },
+        { name: 'Payments', desc: 'Employee withdrawal requests — verify, process, reject with transaction tracking' },
+        { name: 'Offers & Promotions', desc: 'Promo codes, flat/percentage discounts, validity, usage limits, featured services' },
+        { name: 'Notifications', desc: 'Broadcast or targeted FCM push notifications to employees or customers' },
+        { name: 'Taxes', desc: 'Tax rate CRUD — configure tax types and percentages applied to services' },
+        { name: 'Feedback', desc: 'Customer feedback with ratings, admin responses, status workflow' },
+        { name: 'RBAC', desc: '17 menu items — toggle access per staff role in real time' },
+        { name: 'Scrap Services', desc: 'Separate service category for scrap — inquiries, statuses, admin notes' },
+      ],
+    },
+  },
+  {
+    title: 'Vegaa Partner',
+    company: 'Vegaa',
+    description:
+      'Driver partner app for a ride + parcel delivery platform. Auth — register with vehicle details, login with JWT. Rides — real-time incoming requests via Socket.IO, full lifecycle (accept → OTP pickup → navigate → complete with UPI payment). Parcels — same socket-based flow with dual OTP (pickup + delivery). Location — live GPS to Redis every 5s, DB every 30s. Earnings — bar chart analytics, transaction history. Subscription — UPI payment with proof upload, referral program.',
+    tags: ['React Native', 'Node.js', 'Socket.IO', 'PostgreSQL', 'Firebase FCM', 'AWS S3', 'Google Maps', 'Zustand'],
+    video: '',
+    apk: '/vega/vegaa-partner.apk',
+    details: {
+      how: 'Driver logs in → goes Online → GPS starts broadcasting location via Socket.IO (every 5s to Redis, every 30s to DB). When a ride or parcel is available nearby, a socket event triggers an incoming request modal. Driver accepts → app auto-navigates to the job screen. For rides: navigate to pickup → OTP from passenger → start ride → navigate to drop → UPI payment → complete. For parcels: navigate to sender → OTP pickup → in transit → navigate to receiver → OTP delivery → complete. All state is persisted locally so the app recovers after a crash.',
+      frontend: [
+        { module: 'React Native', why: 'Cross-platform mobile app — single codebase for Android' },
+        { module: 'Zustand', why: 'Lightweight global state for auth, ride, parcel, driver, notifications' },
+        { module: 'Socket.IO Client', why: 'Real-time ride/parcel requests, OTP responses, location emit' },
+        { module: 'React Navigation', why: 'Stack + Bottom Tab navigation with deep linking for referral invites' },
+        { module: 'React Native Maps', why: 'Live map view with driver and customer location markers' },
+        { module: 'React Native Chart Kit', why: 'Bar chart for earnings analytics (last 7 days)' },
+        { module: 'Firebase FCM', why: 'Background push notifications for ride/parcel requests' },
+        { module: 'AsyncStorage', why: 'Persist JWT token and ride/parcel state for crash recovery' },
+        { module: 'Axios', why: 'REST API calls with JWT interceptor auto-attached on every request' },
+        { module: 'Image Picker', why: 'Avatar upload and subscription payment proof capture' },
+      ],
+      backend: [
+        { module: 'Node.js + Express', why: 'REST API — auth, rides, parcels, earnings, subscriptions' },
+        { module: 'Socket.IO', why: 'Real-time events — ride/parcel offers, OTP verification, location updates' },
+        { module: 'Redis', why: 'Store live driver locations — fast reads for nearby matching' },
+        { module: 'PostgreSQL', why: 'Primary database — users, trips, parcels, earnings, subscriptions' },
+        { module: 'AWS S3', why: 'Store driver documents (KYC) and subscription payment proofs' },
+        { module: 'Firebase Admin SDK', why: 'Send FCM push notifications to driver devices' },
+        { module: 'JWT', why: 'Token-based auth — all API and socket connections verified' },
+      ],
+      modules: [
+        { name: 'Auth', desc: 'Login, multi-step registration with vehicle details, JWT session with crash recovery' },
+        { name: 'Rides', desc: 'Real-time incoming requests, OTP pickup, navigation, UPI payment collection, completion' },
+        { name: 'Parcels', desc: 'Socket-based parcel queue, dual OTP (pickup + delivery), navigation, status flow' },
+        { name: 'Location', desc: 'Live GPS — Socket.IO every 5s to Redis, REST every 30s to DB, 20m noise filter' },
+        { name: 'Earnings', desc: 'Daily bar chart, Today/Week/Month tabs, transaction history with trip details' },
+        { name: 'Subscription', desc: 'UPI deep links (GPay/PhonePe/Paytm), payment proof upload, plan expiry alerts' },
+        { name: 'Referral', desc: '5 completions = 1 free month, shareable invite link, free coupon redemption' },
+        { name: 'Notifications', desc: 'FCM push + in-app history, type-based icons, auto mark-as-read' },
+        { name: 'Profile & Docs', desc: 'Avatar upload, vehicle info, rating breakdown, KYC document uploads to S3' },
+      ],
+    },
+  },
+]
+// ─────────────────────────────────────────────────────────────────────────────
+
+function toEmbedUrl(url) {
+  if (!url) return null
+  const match = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/)
+  if (match) return `https://www.youtube.com/embed/${match[1]}`
+  return url
+}
+
+function VideoModal({ url, onClose }) {
+  const embed = toEmbedUrl(url)
+  const isVideo = url.endsWith('.mp4') || url.endsWith('.webm')
+  return (
+    <motion.div className="modal-overlay" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose}>
+      <motion.div className="modal-box" initial={{ scale: 0.85, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} onClick={e => e.stopPropagation()}>
+        <button className="modal-close" onClick={onClose}><FiX /></button>
+        {isVideo
+          ? <video src={embed} controls autoPlay className="modal-media" />
+          : <iframe src={embed} className="modal-media" allow="autoplay; encrypted-media" allowFullScreen title="demo" />
+        }
+      </motion.div>
+    </motion.div>
+  )
+}
+
+function DetailModal({ project, onClose }) {
+  const d = project.details
+  return (
+    <motion.div className="modal-overlay" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose}>
+      <motion.div
+        className="detail-modal-box"
+        initial={{ scale: 0.9, opacity: 0, y: 30 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.9, opacity: 0 }}
+        onClick={e => e.stopPropagation()}
+      >
+        <button className="modal-close" onClick={onClose}><FiX /></button>
+
+        <div className="dm-header">
+          <h3>{project.title}</h3>
+          <span className="project-company">{project.company}</span>
+        </div>
+
+        {/* How it runs */}
+        <div className="dm-section">
+          <span className="dm-label">How It Works</span>
+          <p className="dm-text">{d.how}</p>
+        </div>
+
+        {/* Modules */}
+        <div className="dm-section">
+          <span className="dm-label">App Modules</span>
+          <div className="dm-grid">
+            {d.modules.map(m => (
+              <div key={m.name} className="dm-item">
+                <span className="dm-item-name">{m.name}</span>
+                <span className="dm-item-desc">{m.desc}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Frontend */}
+        <div className="dm-section">
+          <span className="dm-label">Frontend — React Native</span>
+          <div className="dm-grid">
+            {d.frontend.map(f => (
+              <div key={f.module} className="dm-item">
+                <span className="dm-item-name">{f.module}</span>
+                <span className="dm-item-desc">{f.why}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Backend */}
+        <div className="dm-section">
+          <span className="dm-label">Backend — Node.js / Express</span>
+          <div className="dm-grid">
+            {d.backend.map(b => (
+              <div key={b.module} className="dm-item">
+                <span className="dm-item-name">{b.module}</span>
+                <span className="dm-item-desc">{b.why}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Tags */}
+        <div className="project-tags" style={{ marginTop: 4 }}>
+          {project.tags.map(tag => <span key={tag} className="tag">{tag}</span>)}
+        </div>
+
+        {project.apk && (
+          <div style={{ marginTop: 16 }}>
+            <a href={project.apk} download className="btn btn-outline" style={{ fontSize: '0.85rem', padding: '9px 18px' }}>
+              <FiDownload /> Download APK
+            </a>
+          </div>
+        )}
+      </motion.div>
+    </motion.div>
+  )
+}
+
+export default function Projects() {
+  const ref = useRef(null)
+  const inView = useInView(ref, { once: true, margin: '-100px' })
+  const [activeVideo, setActiveVideo] = useState(null)
+  const [activeDetail, setActiveDetail] = useState(null)
+
+  return (
+    <section id="projects" ref={ref}>
+      <div className="container">
+        <motion.h2
+          className="section-title"
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+        >
+          Projects
+        </motion.h2>
+
+        <motion.p
+          className="projects-note"
+          initial={{ opacity: 0 }}
+          animate={inView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.3 }}
+        >
+          Built during professional experience — source code is confidential.
+        </motion.p>
+
+        <div className="projects-grid">
+          {projects.map((project, i) => (
+            <motion.div
+              key={project.title}
+              className="project-card"
+              initial={{ opacity: 0, y: 30 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: i * 0.15, duration: 0.6 }}
+              whileHover={{ y: -6 }}
+            >
+              {project.video && (
+                <div
+                  className="project-thumb has-video"
+                  onClick={() => setActiveVideo(project.video)}
+                >
+                  <img
+                    src={`https://img.youtube.com/vi/${toEmbedUrl(project.video)?.split('/embed/')[1]}/hqdefault.jpg`}
+                    alt={project.title}
+                    className="thumb-img"
+                    onError={e => { e.target.style.display = 'none' }}
+                  />
+                  <div className="play-overlay"><FiPlay size={28} /></div>
+                </div>
+              )}
+
+              <div className="project-body">
+                <div className="project-meta">
+                  <h3>{project.title}</h3>
+                  <span className="project-company">{project.company}</span>
+                </div>
+
+                <p className="project-desc">{project.description}</p>
+
+                <div className="project-tags">
+                  {project.tags.map(tag => (
+                    <span key={tag} className="tag">{tag}</span>
+                  ))}
+                </div>
+
+                <div className="project-links">
+                  {project.details && (
+                    <button className="btn btn-primary" onClick={() => setActiveDetail(project)}>
+                      <FiInfo /> View Details
+                    </button>
+                  )}
+                  {project.video && (
+                    <button className="btn btn-primary" onClick={() => setActiveVideo(project.video)}>
+                      <FiPlay /> Watch Demo
+                    </button>
+                  )}
+                  {project.apk && (
+                    <a href={project.apk} download className="btn btn-outline">
+                      <FiDownload /> Download APK
+                    </a>
+                  )}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      <AnimatePresence>
+        {activeVideo && <VideoModal url={activeVideo} onClose={() => setActiveVideo(null)} />}
+        {activeDetail && <DetailModal project={activeDetail} onClose={() => setActiveDetail(null)} />}
+      </AnimatePresence>
+
+      <style>{`
+        .projects-note {
+          text-align: center;
+          color: var(--text-muted);
+          font-size: 0.9rem;
+          margin-top: -40px;
+          margin-bottom: 48px;
+          opacity: 0.7;
+        }
+        .projects-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+          gap: 24px;
+        }
+        .project-card {
+          background: var(--bg-card);
+          border: 1px solid var(--border);
+          border-radius: 16px;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          transition: border-color 0.3s;
+        }
+        .project-card:hover { border-color: var(--accent); }
+
+        .project-thumb {
+          width: 100%;
+          aspect-ratio: 16/9;
+          position: relative;
+          background: #0d0d1a;
+          overflow: hidden;
+        }
+        .project-thumb.has-video { cursor: pointer; }
+        .thumb-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; transition: opacity 0.3s; }
+        .project-thumb.has-video:hover .thumb-img { opacity: 1; }
+        .play-overlay {
+          position: absolute; inset: 0;
+          display: flex; align-items: center; justify-content: center;
+          background: rgba(0,0,0,0.35); transition: background 0.3s;
+        }
+        .project-thumb.has-video:hover .play-overlay { background: rgba(124,58,237,0.5); }
+        .play-overlay svg { color: #fff; filter: drop-shadow(0 2px 8px rgba(0,0,0,0.6)); }
+        .thumb-placeholder {
+          width: 100%; height: 100%;
+          display: flex; align-items: center; justify-content: center;
+          background: linear-gradient(135deg, rgba(124,58,237,0.08), rgba(6,182,212,0.05));
+          border-bottom: 1px solid var(--border);
+        }
+        .thumb-placeholder span { color: var(--text-muted); font-size: 0.85rem; font-weight: 500; letter-spacing: 1px; }
+
+        .project-body { padding: 22px 24px; display: flex; flex-direction: column; gap: 14px; flex: 1; }
+        .project-meta { display: flex; flex-direction: column; gap: 4px; }
+        .project-card h3 { font-size: 1.15rem; font-weight: 700; color: var(--text); }
+        .project-company { font-size: 0.8rem; color: var(--accent2); font-weight: 600; letter-spacing: 0.5px; }
+        .project-desc { color: var(--text-muted); font-size: 0.93rem; line-height: 1.75; }
+        .project-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+        .tag {
+          background: rgba(124,58,237,0.12); color: var(--accent2);
+          border: 1px solid rgba(124,58,237,0.25);
+          padding: 4px 11px; border-radius: 20px; font-size: 0.78rem; font-weight: 600;
+        }
+        .project-links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: auto; }
+        .project-links .btn { font-size: 0.85rem; padding: 9px 18px; }
+
+        /* Video Modal */
+        .modal-overlay {
+          position: fixed; inset: 0;
+          background: rgba(0,0,0,0.85);
+          z-index: 1000;
+          display: flex; align-items: center; justify-content: center;
+          padding: 20px;
+        }
+        .modal-box {
+          position: relative; width: 100%; max-width: 860px;
+          background: #0d0d1a; border-radius: 16px; overflow: hidden;
+          border: 1px solid var(--border);
+        }
+        .modal-close {
+          position: absolute; top: 12px; right: 12px; z-index: 10;
+          background: rgba(0,0,0,0.6); border: none; color: #fff;
+          border-radius: 50%; width: 36px; height: 36px;
+          display: flex; align-items: center; justify-content: center;
+          cursor: pointer; font-size: 1.1rem;
+        }
+        .modal-media { width: 100%; aspect-ratio: 16/9; border: none; display: block; }
+
+        /* Detail Modal */
+        .detail-modal-box {
+          position: relative; width: 100%; max-width: 720px;
+          max-height: 88vh; overflow-y: auto;
+          background: #0d0d1a; border-radius: 16px;
+          border: 1px solid var(--border);
+          padding: 32px 28px 28px;
+          scrollbar-width: thin;
+          scrollbar-color: var(--accent) transparent;
+        }
+        .dm-header { margin-bottom: 24px; }
+        .dm-header h3 { font-size: 1.3rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+        .dm-section { margin-bottom: 22px; }
+        .dm-label {
+          display: block; font-size: 0.7rem; font-weight: 800;
+          letter-spacing: 1.5px; text-transform: uppercase;
+          color: var(--accent2); margin-bottom: 10px;
+        }
+        .dm-text { font-size: 0.88rem; color: var(--text-muted); line-height: 1.75; }
+        .dm-grid { display: flex; flex-direction: column; gap: 8px; }
+        .dm-item {
+          display: flex; gap: 10px; align-items: flex-start;
+          background: rgba(255,255,255,0.03);
+          border: 1px solid var(--border);
+          border-radius: 8px; padding: 8px 12px;
+        }
+        .dm-item-name {
+          font-size: 0.8rem; font-weight: 700; color: var(--text);
+          min-width: 140px; flex-shrink: 0;
+        }
+        .dm-item-desc { font-size: 0.8rem; color: var(--text-muted); line-height: 1.5; }
+
+        @media (max-width: 768px) {
+          .projects-grid { grid-template-columns: 1fr; }
+          .detail-modal-box { padding: 24px 18px 20px; }
+          .dm-item { flex-direction: column; gap: 3px; }
+          .dm-item-name { min-width: unset; }
+        }
+      `}</style>
+    </section>
+  )
+}
