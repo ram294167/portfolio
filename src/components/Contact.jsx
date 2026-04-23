@@ -5,7 +5,7 @@ import { FiGithub, FiMail, FiLinkedin } from 'react-icons/fi'
 
 const socials = [
   { icon: FiGithub, label: 'GitHub', href: 'https://github.com/ram294167' },
-  { icon: FiLinkedin, label: 'LinkedIn', href: 'https://linkedin.com/in/yourusername' },
+  { icon: FiLinkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/rama-prakash-240b4127b/' },
   { icon: FiMail, label: 'Email', href: 'https://mail.google.com/mail/?view=cm&to=chappidiramaprakash167@gmail.com' },
 ]
 
