@@ -128,6 +128,47 @@ const projects = [
       ],
     },
   },
+  {
+    title: 'Vegaa Admin Panel',
+    company: 'Vegaa',
+    description:
+      'Web-based admin dashboard for the Vegaa ride-sharing platform. Manages drivers, customers, rides, payments, vehicle pricing, offers, promo ads, referrals, and team permissions. Role-based access control with a granular permission matrix per screen. Super-admin controls employee creation, role management, and screen-level access. Source code and live access are confidential.',
+    tags: ['React', 'Vite', 'Tailwind CSS', 'Radix UI', 'Node.js', 'PostgreSQL', 'JWT', 'REST API', 'RBAC'],
+    video: '',
+    apk: '',
+    details: {
+      how: 'Admin logs in with email/password → JWT token stored in localStorage → role and permissions decoded from token → sidebar filters navigation based on allowed screens. Each module fetches from a Node.js/Express REST API with Bearer token. Super admin has unrestricted access; custom roles see only permitted screens. Permission matrix is a live checkbox grid — changes saved in bulk to the backend.',
+      frontend: [
+        { module: 'React 19', why: 'Component-based dashboard UI — each module is an independent page' },
+        { module: 'React Router v7', why: 'Client-side routing with protected route wrappers and permission guards' },
+        { module: 'Tailwind CSS', why: 'Utility-first styling — fast, consistent UI across all modules' },
+        { module: 'Radix UI', why: 'Headless dialog, dropdown, tooltip, separator components for accessible UI' },
+        { module: 'Lucide React', why: 'SVG icon library used across all pages and components' },
+        { module: 'JWT Decode', why: 'Decode token client-side to extract role, permissions, and expiry' },
+        { module: 'Vite', why: 'Fast dev server and build tool with Nginx proxy config for production' },
+      ],
+      backend: [
+        { module: 'Node.js + Express', why: 'REST API — all admin operations routed through dedicated endpoints' },
+        { module: 'PostgreSQL', why: 'Primary database — drivers, rides, payments, offers, roles, employees' },
+        { module: 'JWT', why: 'Token-based auth — role and permissions verified on every request' },
+        { module: 'AWS S3', why: 'Store promo ad images and driver documents with presigned URLs' },
+        { module: 'Nginx', why: 'Reverse proxy in production — handles API routing and WebSocket upgrade' },
+      ],
+      modules: [
+        { name: 'Dashboard', desc: 'KPI cards — total rides, active rides, drivers, customers. Recent rides table with status badges.' },
+        { name: 'Rides', desc: 'Full ride history with search by customer/driver/ID and status filter across 6 states.' },
+        { name: 'Drivers', desc: 'Driver profiles, approval workflow, KYC document review, subscription plan management with proof images.' },
+        { name: 'Customers', desc: 'Customer directory with search, coin balance tracking, join date.' },
+        { name: 'Payments', desc: 'Transaction history — ride ID, amount, method, status tracking.' },
+        { name: 'Vehicle Types', desc: 'Full CRUD — key, label, icon, seats, base fare, per-km rate, sort order, active toggle.' },
+        { name: 'Offers', desc: 'Promo code CRUD — flat/percentage discount, minimum fare, validity date, badge color, active toggle.' },
+        { name: 'Promo Ads', desc: 'In-app banner management — image upload, CTA, background color, badge, expiry, display order.' },
+        { name: 'Referrals', desc: 'Three-tab view: driver referrals, customer referrals, free coupons. Stats — completions, coins awarded.' },
+        { name: 'Employees', desc: 'HR module — add/edit staff with account, personal info, ID documents, bank details. Role assignment.' },
+        { name: 'Team & Permissions', desc: 'Role creation, screen management, and a live permission matrix — checkbox grid mapping roles to screens, saved in bulk.' },
+      ],
+    },
+  },
 ]
 // ─────────────────────────────────────────────────────────────────────────────
 

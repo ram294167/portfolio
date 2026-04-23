@@ -3,6 +3,7 @@ import { TypeAnimation } from 'react-type-animation'
 import { FiArrowDown, FiDownload, FiEye, FiX } from 'react-icons/fi'
 import { SiLeetcode } from 'react-icons/si'
 import { useState } from 'react'
+import profileImg from '../assets/profile.png'
 
 export default function Hero() {
   const [showResume, setShowResume] = useState(false)
@@ -10,6 +11,7 @@ export default function Hero() {
   return (
     <section id="hero" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', position: 'relative' }}>
       <div className="container">
+        <div className="hero-layout">
         <motion.div
           className="hero-content"
           initial={{ opacity: 0, y: 40 }}
@@ -108,6 +110,16 @@ export default function Hero() {
             ))}
           </motion.div>
         </motion.div>
+
+          <motion.div
+            className="hero-profile"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.6, duration: 0.7 }}
+          >
+            <img src={profileImg} alt="Rama Prakash" className="profile-img" />
+          </motion.div>
+        </div>
       </div>
 
       <motion.div
@@ -151,6 +163,27 @@ export default function Hero() {
       </AnimatePresence>
 
       <style>{`
+        .hero-layout {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 40px;
+        }
+        .hero-profile {
+          flex-shrink: 0;
+        }
+        .profile-img {
+          width: 260px;
+          height: 260px;
+          border-radius: 50%;
+          object-fit: cover;
+          border: 3px solid var(--accent);
+          box-shadow: 0 0 40px rgba(124, 58, 237, 0.3);
+        }
+        @media (max-width: 768px) {
+          .hero-layout { flex-direction: column-reverse; align-items: flex-start; }
+          .profile-img { width: 140px; height: 140px; }
+        }
         .hero-greeting {
           color: var(--accent2);
           font-size: 0.9rem;

@@ -134,6 +134,45 @@ export default function About() {
           })}
         </div>
 
+        {/* Experience */}
+        <motion.div
+          className="about-experience"
+          initial={{ opacity: 0, y: 24 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ delay: 0.6, duration: 0.6 }}
+        >
+          <h4 className="exp-section-title">Experience</h4>
+          <div className="exp-card">
+            <div className="exp-header">
+              <div>
+                <span className="exp-role">Database Intern</span>
+                <span className="exp-company">Algonox Pvt. Ltd.</span>
+              </div>
+              <span className="exp-date">Oct 2024 – Jan 2025</span>
+            </div>
+            <p className="exp-subtitle">Database Management, Migration & Backend Integration</p>
+            <ul className="exp-points">
+              {[
+                'Migrated full production database from MSSQL to PostgreSQL — schema translation, data type mapping, duplicate removal, and post-migration validation with zero data loss.',
+                'Wrote SQL scripts, stored procedures, triggers, and views to automate repetitive data operations and reduce manual overhead for the backend team.',
+                'Built and optimized complex queries — joins, aggregations, CTEs, window functions — and profiled slow queries using EXPLAIN ANALYZE with targeted indexing.',
+                'Designed normalized schemas (3NF) for new tables and integrated them with existing RESTful API endpoints to improve response times.',
+                'Learned and applied prepared statements, functions, and transaction control to build reliable, injection-safe database interactions.',
+              ].map((pt, i) => (
+                <li key={i}>
+                  <span className="exp-dot" />
+                  {pt}
+                </li>
+              ))}
+            </ul>
+            <div className="exp-tags">
+              {['PostgreSQL', 'MSSQL', 'SQL', 'Stored Procedures', 'Triggers', 'Views', 'Indexing', 'Data Migration', 'Query Optimization'].map(t => (
+                <span key={t} className="exp-tag">{t}</span>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+
         {/* Journey timeline — horizontal */}
         <motion.div
           className="about-journey"
@@ -303,6 +342,98 @@ export default function About() {
           border-radius: 50%;
           margin-top: 8px;
           flex-shrink: 0;
+        }
+
+        /* Experience */
+        .about-experience {
+          margin-bottom: 32px;
+        }
+        .exp-section-title {
+          font-size: 0.75rem;
+          font-weight: 700;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+          color: var(--accent2);
+          margin-bottom: 16px;
+        }
+        .exp-card {
+          background: var(--bg-card);
+          border: 1px solid var(--border);
+          border-left: 3px solid var(--accent);
+          border-radius: 14px;
+          padding: 24px 26px;
+          display: flex;
+          flex-direction: column;
+          gap: 14px;
+        }
+        .exp-header {
+          display: flex;
+          align-items: flex-start;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 8px;
+        }
+        .exp-role {
+          display: block;
+          font-size: 1.05rem;
+          font-weight: 800;
+          color: var(--text);
+          margin-bottom: 3px;
+        }
+        .exp-company {
+          display: block;
+          font-size: 0.82rem;
+          font-weight: 600;
+          color: var(--accent2);
+        }
+        .exp-date {
+          font-size: 0.8rem;
+          color: var(--text-muted);
+          font-weight: 500;
+          white-space: nowrap;
+        }
+        .exp-subtitle {
+          font-size: 0.85rem;
+          font-weight: 600;
+          color: var(--text-muted);
+          font-style: italic;
+        }
+        .exp-points {
+          list-style: none;
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+        }
+        .exp-points li {
+          display: flex;
+          align-items: flex-start;
+          gap: 10px;
+          color: var(--text-muted);
+          font-size: 0.9rem;
+          line-height: 1.75;
+        }
+        .exp-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: var(--accent);
+          flex-shrink: 0;
+          margin-top: 9px;
+        }
+        .exp-tags {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 8px;
+          margin-top: 4px;
+        }
+        .exp-tag {
+          padding: 4px 11px;
+          border-radius: 20px;
+          font-size: 0.75rem;
+          font-weight: 600;
+          background: rgba(124,58,237,0.1);
+          border: 1px solid rgba(124,58,237,0.25);
+          color: var(--accent2);
         }
 
         /* Journey */
