@@ -13,6 +13,7 @@ const projects = [
     tags: ['React Native', 'Node.js', 'Express', 'PostgreSQL', 'Firebase FCM', 'AWS S3', 'Google Maps', 'Google Auth'],
     video: '',
     apk: '/corefix-partner.apk',
+    comingSoon: true,
     details: {
       how: 'Employee opens app → goes Online (toggles availability) → GPS starts tracking location to backend in real time. When a nearby job is created, FCM sends a push notification → a modal pops with 30s countdown. Employee accepts → job lifecycle begins: Start → Navigate → Reach → OTP complete. After completion, earnings are added to wallet.',
       frontend: [
@@ -51,6 +52,7 @@ const projects = [
     tags: ['React', 'Node.js', 'Express', 'PostgreSQL', 'FCM', 'AWS S3', 'REST API'],
     video: '',
     apk: '',
+    comingSoon: true,
     details: {
       how: 'Admin logs in → accesses role-restricted modules based on permissions. Each module talks to the Node.js/Express REST API. Data is stored in PostgreSQL. Documents and images go to AWS S3. Push notifications are sent via Firebase FCM to employees or customers. Staff access is controlled per menu item through an RBAC system.',
       frontend: [
@@ -90,7 +92,7 @@ const projects = [
     description:
       'Driver partner app for a ride + parcel delivery platform. Auth — register with vehicle details, login with JWT. Rides — real-time incoming requests via Socket.IO, full lifecycle (accept → OTP pickup → navigate → complete with UPI payment). Parcels — same socket-based flow with dual OTP (pickup + delivery). Location — live GPS to Redis every 5s, DB every 30s. Earnings — bar chart analytics, transaction history. Subscription — UPI payment with proof upload, referral program.',
     tags: ['React Native', 'Node.js', 'Socket.IO', 'PostgreSQL', 'Firebase FCM', 'AWS S3', 'Google Maps', 'Zustand'],
-    video: '',
+    videos: ['/vega/vega-demo-1.mp4', '/vega/vega-demo-2.mp4'],
     apk: '/vega/vegaa-partner.apk',
     details: {
       how: 'Driver logs in → goes Online → GPS starts broadcasting location via Socket.IO (every 5s to Redis, every 30s to DB). When a ride or parcel is available nearby, a socket event triggers an incoming request modal. Driver accepts → app auto-navigates to the job screen. For rides: navigate to pickup → OTP from passenger → start ride → navigate to drop → UPI payment → complete. For parcels: navigate to sender → OTP pickup → in transit → navigate to receiver → OTP delivery → complete. All state is persisted locally so the app recovers after a crash.',
@@ -136,6 +138,7 @@ const projects = [
     tags: ['React', 'Vite', 'Tailwind CSS', 'Radix UI', 'Node.js', 'PostgreSQL', 'JWT', 'REST API', 'RBAC'],
     video: '',
     apk: '',
+    comingSoon: true,
     details: {
       how: 'Admin logs in with email/password → JWT token stored in localStorage → role and permissions decoded from token → sidebar filters navigation based on allowed screens. Each module fetches from a Node.js/Express REST API with Bearer token. Super admin has unrestricted access; custom roles see only permitted screens. Permission matrix is a live checkbox grid — changes saved in bulk to the backend.',
       frontend: [
@@ -312,24 +315,38 @@ export default function Projects() {
               transition={{ delay: i * 0.15, duration: 0.6 }}
               whileHover={{ y: -6 }}
             >
-              {project.video && (
+              {(project.video || project.videos) ? (
                 <div
                   className="project-thumb has-video"
-                  onClick={() => setActiveVideo(project.video)}
+                  onClick={() => {
+                    const videoUrl = project.videos ? project.videos[0] : project.video
+                    setActiveVideo(videoUrl)
+                  }}
                 >
                   <img
-                    src={`https://img.youtube.com/vi/${toEmbedUrl(project.video)?.split('/embed/')[1]}/hqdefault.jpg`}
+                    src={`https://img.youtube.com/vi/${toEmbedUrl(project.videos?.[0] || project.video)?.split('/embed/')[1]}/hqdefault.jpg`}
                     alt={project.title}
                     className="thumb-img"
                     onError={e => { e.target.style.display = 'none' }}
                   />
                   <div className="play-overlay"><FiPlay size={28} /></div>
                 </div>
+              ) : project.comingSoon ? (
+                <div className="thumb-placeholder">
+                  <span>Coming Soon...</span>
+                </div>
+              ) : (
+                <div className="thumb-placeholder">
+                  <span>Project Video</span>
+                </div>
               )}
 
               <div className="project-body">
                 <div className="project-meta">
-                  <h3>{project.title}</h3>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                    <h3>{project.title}</h3>
+                    {project.comingSoon && <span className="coming-soon-badge">Coming Soon</span>}
+                  </div>
                   <span className="project-company">{project.company}</span>
                 </div>
 
@@ -347,8 +364,11 @@ export default function Projects() {
                       <FiInfo /> View Details
                     </button>
                   )}
-                  {project.video && (
-                    <button className="btn btn-primary" onClick={() => setActiveVideo(project.video)}>
+                  {(project.video || project.videos) && (
+                    <button className="btn btn-primary" onClick={() => {
+                      const videoUrl = project.videos ? project.videos[0] : project.video
+                      setActiveVideo(videoUrl)
+                    }}>
                       <FiPlay /> Watch Demo
                     </button>
                   )}
@@ -422,6 +442,13 @@ export default function Projects() {
         .project-body { padding: 22px 24px; display: flex; flex-direction: column; gap: 14px; flex: 1; }
         .project-meta { display: flex; flex-direction: column; gap: 4px; }
         .project-card h3 { font-size: 1.15rem; font-weight: 700; color: var(--text); }
+        .coming-soon-badge {
+          background: rgba(249,115,22,0.15); color: #fb923c;
+          border: 1px solid rgba(249,115,22,0.35);
+          padding: 3px 10px; border-radius: 12px; font-size: 0.7rem; 
+          font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase;
+          white-space: nowrap;
+        }
         .project-company { font-size: 0.8rem; color: var(--accent2); font-weight: 600; letter-spacing: 0.5px; }
         .project-desc { color: var(--text-muted); font-size: 0.93rem; line-height: 1.75; }
         .project-tags { display: flex; flex-wrap: wrap; gap: 8px; }
