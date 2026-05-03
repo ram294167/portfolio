@@ -315,7 +315,7 @@ export default function Projects() {
               transition={{ delay: i * 0.15, duration: 0.6 }}
               whileHover={{ y: -6 }}
             >
-              {(project.video || project.videos) ? (
+              {((project.video && [project.video]) || project.videos)?.length > 0 ? (
                 <div
                   className="project-thumb has-video"
                   onClick={() => {
@@ -323,12 +323,9 @@ export default function Projects() {
                     setActiveVideo(videoUrl)
                   }}
                 >
-                  <img
-                    src={`https://img.youtube.com/vi/${toEmbedUrl(project.videos?.[0] || project.video)?.split('/embed/')[1]}/hqdefault.jpg`}
-                    alt={project.title}
-                    className="thumb-img"
-                    onError={e => { e.target.style.display = 'none' }}
-                  />
+                  <div className="thumb-placeholder">
+                    <span>{project.videos?.length > 1 ? 'Watch Demo Videos' : 'Watch Demo Video'}</span>
+                  </div>
                   <div className="play-overlay"><FiPlay size={28} /></div>
                 </div>
               ) : project.comingSoon ? (
@@ -365,12 +362,17 @@ export default function Projects() {
                     </button>
                   )}
                   {(project.video || project.videos) && (
-                    <button className="btn btn-primary" onClick={() => {
-                      const videoUrl = project.videos ? project.videos[0] : project.video
-                      setActiveVideo(videoUrl)
-                    }}>
-                      <FiPlay /> Watch Demo
-                    </button>
+                    <>
+                      {(project.videos || [project.video]).map((videoUrl, idx) => (
+                        <button
+                          key={videoUrl}
+                          className="btn btn-primary"
+                          onClick={() => setActiveVideo(videoUrl)}
+                        >
+                          <FiPlay /> {project.videos?.length > 1 ? `Demo ${idx + 1}` : 'Watch Demo'}
+                        </button>
+                      ))}
+                    </>
                   )}
                   {project.apk && (
                     <a href={project.apk} download className="btn btn-outline">
