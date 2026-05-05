@@ -92,12 +92,12 @@ const projects = [
       'Driver partner app for a ride + parcel delivery platform. Auth — register with vehicle details, login with JWT. Rides — real-time incoming requests via Socket.IO, full lifecycle (accept → OTP pickup → navigate → complete with UPI payment). Parcels — same socket-based flow with dual OTP (pickup + delivery). Location — live GPS to Redis every 5s, DB every 30s. Earnings — bar chart analytics, transaction history. Subscription — UPI payment with proof upload, referral program.',
     tags: ['React Native', 'Node.js', 'Socket.IO', 'PostgreSQL', 'Firebase FCM', 'AWS S3', 'Google Maps', 'Zustand'],
     videos: [
-      { url: '/vega/WhatsApp Video 2026-05-05 at 3.48.38 PM.mp4', label: 'Customer App Demo' },
-      { url: '/vega/WhatsApp Video 2026-05-05 at 3.48.04 PM.mp4', label: 'Driver App Demo' },
+      { url: '/vega/WhatsApp Video 2026-05-05 at 3.48.38 PM.mp4', label: 'Demo 1' },
+      { url: '/vega/WhatsApp Video 2026-05-05 at 3.48.04 PM.mp4', label: 'Demo 2' },
     ],
     apk: '/vega/vegaa-partner.apk',
     details: {
-      how: 'Driver logs in → goes Online → GPS starts broadcasting location via Socket.IO (every 5s to Redis, every 30s to DB). When a ride or parcel is available nearby, a socket event triggers an incoming request modal. Driver accepts → app auto-navigates to the job screen. For rides: navigate to pickup → OTP from passenger → start ride → navigate to drop → UPI payment → complete. For parcels: navigate to sender → OTP pickup → in transit → navigate to receiver → OTP delivery → complete. Use Customer App Demo and Driver App Demo to play the two Vegaa partner demos separately. All state is persisted locally so the app recovers after a crash.',
+      how: 'Driver logs in → goes Online → GPS starts broadcasting location via Socket.IO (every 5s to Redis, every 30s to DB). When a ride or parcel is available nearby, a socket event triggers an incoming request modal. Driver accepts → app auto-navigates to the job screen. For rides: navigate to pickup → OTP from passenger → start ride → navigate to drop → UPI payment → complete. For parcels: navigate to sender → OTP pickup → in transit → navigate to receiver → OTP delivery → complete. Use Demo 1 and Demo 2 to play the two Vegaa partner demos separately. All state is persisted locally so the app recovers after a crash.',
       frontend: [
         { module: 'React Native', why: 'Cross-platform mobile app — single codebase for Android' },
         { module: 'Zustand', why: 'Lightweight global state for auth, ride, parcel, driver, notifications' },
@@ -428,7 +428,7 @@ export default function Projects() {
                       <FiInfo /> View Details
                     </button>
                   )}
-                  {(project.video || project.videos) && project.video !== project.link && (
+                  {((project.video && project.video !== project.link) || project.videos) && (
                     <div className="project-demo-buttons">
                       <span className="demo-label">Video Demos:</span>
                       {(project.videos || [project.video]).map((video, idx) => {
