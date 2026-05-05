@@ -172,6 +172,40 @@ const projects = [
       ],
     },
   },
+  {
+    title: 'Invoice Generator',
+    company: 'Personal Project',
+    description:
+      'A modern React-powered invoice builder application that allows users to create, edit, and export professional invoices as PDFs. Features dynamic invoice editing, GST calculations, file uploads for logos and signatures, and instant PDF generation with html2canvas and jsPDF.',
+    tags: ['React', 'Vite', 'html2canvas', 'jsPDF', 'CSS', 'Local Storage'],
+    video: 'https://invoice-generator-hioi.vercel.app/',
+    apk: '',
+    link: 'https://invoice-generator-hioi.vercel.app/',
+    github: 'https://github.com/your-username/invoice-generator',
+    details: {
+      how: 'User fills in company details, invoice number, date, and event name in the left panel. Items are added with quantity, rate, discount, and GST fields. Real-time calculations update the invoice preview on the right side showing taxable amount, GST, and grand total. Logos, QR codes, and signatures can be uploaded and displayed on the invoice. Once complete, the user clicks "Download PDF" to generate and download the professional invoice using html2canvas and jsPDF.',
+      frontend: [
+        { module: 'React', why: 'Component-based UI for invoice editing form and preview' },
+        { module: 'Vite', why: 'Fast development server and optimized production build' },
+        { module: 'html2canvas', why: 'Captures the invoice HTML template as a high-quality image for PDF generation' },
+        { module: 'jsPDF', why: 'Converts the captured image into a downloadable PDF file' },
+        { module: 'CSS', why: 'Responsive design for desktop and mobile invoice layout' },
+        { module: 'Local Storage', why: 'Persists invoice data in browser for session continuity' },
+        { module: 'React Hooks', why: 'State management for form inputs, items, and calculations' },
+      ],
+      backend: [],
+      modules: [
+        { name: 'Invoice Details', desc: 'Company name, invoice number, date, event name, billing address form fields' },
+        { name: 'Item Management', desc: 'Add/edit/delete invoice line items with quantity, rate, discount percentage, and GST amount' },
+        { name: 'Calculations', desc: 'Real-time subtotal, taxable amount, GST, and grand total computation' },
+        { name: 'File Uploads', desc: 'Upload and embed logos, QR codes, and digital signatures on the invoice' },
+        { name: 'Invoice Preview', desc: 'Live preview showing professional invoice layout as you edit' },
+        { name: 'PDF Export', desc: 'Generate and download fully formatted invoice as PDF file' },
+        { name: 'Responsive Design', desc: 'Works seamlessly on desktop and mobile devices with auto-scaling' },
+        { name: 'Data Persistence', desc: 'Saves invoice data to browser LocalStorage for offline access' },
+      ],
+    },
+  },
 ]
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -356,12 +390,17 @@ export default function Projects() {
                 </div>
 
                 <div className="project-links">
+                  {project.link && (
+                    <a href={project.link} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+                      <FiPlay /> Visit Project
+                    </a>
+                  )}
                   {project.details && (
                     <button className="btn btn-primary" onClick={() => setActiveDetail(project)}>
                       <FiInfo /> View Details
                     </button>
                   )}
-                  {(project.video || project.videos) && (
+                  {(project.video || project.videos) && project.video !== project.link && (
                     <>
                       {(project.videos || [project.video]).map((videoUrl, idx) => (
                         <button
