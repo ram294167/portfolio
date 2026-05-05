@@ -92,8 +92,8 @@ const projects = [
       'Driver partner app for a ride + parcel delivery platform. Auth — register with vehicle details, login with JWT. Rides — real-time incoming requests via Socket.IO, full lifecycle (accept → OTP pickup → navigate → complete with UPI payment). Parcels — same socket-based flow with dual OTP (pickup + delivery). Location — live GPS to Redis every 5s, DB every 30s. Earnings — bar chart analytics, transaction history. Subscription — UPI payment with proof upload, referral program.',
     tags: ['React Native', 'Node.js', 'Socket.IO', 'PostgreSQL', 'Firebase FCM', 'AWS S3', 'Google Maps', 'Zustand'],
     videos: [
-      { url: '/vega/WhatsApp Video 2026-05-05 at 3.48.38 PM.mp4', label: 'Demo 1 — WhatsApp Video 3.48.38 PM' },
-      { url: '/vega/WhatsApp Video 2026-05-05 at 3.48.04 PM.mp4', label: 'Demo 2 — WhatsApp Video 3.48.04 PM' },
+      { url: '/vega/WhatsApp Video 2026-05-05 at 3.48.38 PM.mp4', label: 'Demo 1' },
+      { url: '/vega/WhatsApp Video 2026-05-05 at 3.48.04 PM.mp4', label: 'Demo 2' },
     ],
     apk: '/vega/vegaa-partner.apk',
     details: {
