@@ -183,7 +183,7 @@ const projects = [
     video: 'https://invoice-generator-hioi.vercel.app/',
     apk: '',
     link: 'https://invoice-generator-hioi.vercel.app/',
-    github: 'https://github.com/your-username/invoice-generator',
+    github: 'https://github.com/ram294167/invoice-generator',
     details: {
       how: 'User fills in company details, invoice number, date, and event name in the left panel. Items are added with quantity, rate, discount, and GST fields. Real-time calculations update the invoice preview on the right side showing taxable amount, GST, and grand total. Logos, QR codes, and signatures can be uploaded and displayed on the invoice. Once complete, the user clicks "Download PDF" to generate and download the professional invoice using html2canvas and jsPDF.',
       frontend: [
@@ -216,8 +216,8 @@ const projects = [
     tags: ['Python', 'Jupyter Notebook', 'Pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'Scikit-learn', 'YouTube API', 'Plotly', 'NLTK'],
     video: '',
     apk: '',
-    link: 'https://github.com/your-username/analyzing-youtube-channels',
-    github: 'https://github.com/your-username/analyzing-youtube-channels',
+    link: 'https://github.com/ram294167',
+    github: 'https://github.com/ram294167/analyzing-youtube-channels',
     details: {
       how: 'The analysis begins by connecting to the YouTube Data API to extract comprehensive channel metrics including subscriber growth, video performance, watch time, and engagement data. Data is processed using Pandas for cleaning and manipulation, then analyzed with statistical methods and machine learning algorithms. Interactive visualizations are created with Plotly and Matplotlib to identify patterns. The final output provides strategic recommendations for optimal posting times, content types, and growth strategies.',
       frontend: [],
@@ -377,27 +377,16 @@ export default function Projects() {
               transition={{ delay: i * 0.15, duration: 0.6 }}
               whileHover={{ y: -6 }}
             >
-              {((project.video && [project.video]) || project.videos)?.length > 0 ? (
-                <div
-                  className="project-thumb has-video"
-                  onClick={() => {
-                    const videoUrl = project.videos ? project.videos[0].url : project.video
-                    setActiveVideo(videoUrl)
-                  }}
-                >
+              {!((project.video && [project.video]) || project.videos)?.length && (
+                project.comingSoon ? (
                   <div className="thumb-placeholder">
-                    <span>{project.videos?.length > 1 ? 'Tap a Demo 1 or Demo 2 button below' : 'Watch Demo Video'}</span>
+                    <span>Coming Soon...</span>
                   </div>
-                  <div className="play-overlay"><FiPlay size={28} /></div>
-                </div>
-              ) : project.comingSoon ? (
-                <div className="thumb-placeholder">
-                  <span>Coming Soon...</span>
-                </div>
-              ) : (
-                <div className="thumb-placeholder">
-                  <span>Project Video</span>
-                </div>
+                ) : (
+                  <div className="thumb-placeholder">
+                    <span>Project Video</span>
+                  </div>
+                )
               )}
 
               <div className="project-body">
