@@ -95,7 +95,7 @@ const projects = [
     videos: ['/vega/vega-demo-1.mp4', '/vega/vega-demo-2.mp4'],
     apk: '/vega/vegaa-partner.apk',
     details: {
-      how: 'Driver logs in → goes Online → GPS starts broadcasting location via Socket.IO (every 5s to Redis, every 30s to DB). When a ride or parcel is available nearby, a socket event triggers an incoming request modal. Driver accepts → app auto-navigates to the job screen. For rides: navigate to pickup → OTP from passenger → start ride → navigate to drop → UPI payment → complete. For parcels: navigate to sender → OTP pickup → in transit → navigate to receiver → OTP delivery → complete. All state is persisted locally so the app recovers after a crash.',
+      how: 'Driver logs in → goes Online → GPS starts broadcasting location via Socket.IO (every 5s to Redis, every 30s to DB). When a ride or parcel is available nearby, a socket event triggers an incoming request modal. Driver accepts → app auto-navigates to the job screen. For rides: navigate to pickup → OTP from passenger → start ride → navigate to drop → UPI payment → complete. For parcels: navigate to sender → OTP pickup → in transit → navigate to receiver → OTP delivery → complete. Use Demo 1 and Demo 2 to play the two Vegaa partner demos separately. All state is persisted locally so the app recovers after a crash.',
       frontend: [
         { module: 'React Native', why: 'Cross-platform mobile app — single codebase for Android' },
         { module: 'Zustand', why: 'Lightweight global state for auth, ride, parcel, driver, notifications' },
@@ -358,7 +358,7 @@ export default function Projects() {
                   }}
                 >
                   <div className="thumb-placeholder">
-                    <span>{project.videos?.length > 1 ? 'Watch Demo Videos' : 'Watch Demo Video'}</span>
+                    <span>{project.videos?.length > 1 ? 'Play Demo 1 or Demo 2' : 'Watch Demo Video'}</span>
                   </div>
                   <div className="play-overlay"><FiPlay size={28} /></div>
                 </div>
