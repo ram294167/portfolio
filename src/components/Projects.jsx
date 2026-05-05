@@ -429,7 +429,8 @@ export default function Projects() {
                     </button>
                   )}
                   {(project.video || project.videos) && project.video !== project.link && (
-                    <>
+                    <div className="project-demo-buttons">
+                      <span className="demo-label">Video Demos:</span>
                       {(project.videos || [project.video]).map((video, idx) => {
                         const videoUrl = typeof video === 'string' ? video : video.url
                         const label = typeof video === 'string' ? (project.videos?.length > 1 ? `Demo ${idx + 1}` : 'Watch Demo') : video.label
@@ -443,7 +444,7 @@ export default function Projects() {
                           </button>
                         )
                       })}
-                    </>
+                    </div>
                   )}
                   {project.apk && (
                     <>
@@ -537,6 +538,8 @@ export default function Projects() {
         }
         .project-links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: auto; }
         .project-links .btn { font-size: 0.85rem; padding: 9px 18px; }
+        .project-demo-buttons { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 6px; }
+        .demo-label { color: var(--text-muted); font-size: 0.82rem; font-weight: 700; margin-right: 8px; white-space: nowrap; }
         .apk-warning {
           margin-top: 10px;
           color: var(--text-muted);
