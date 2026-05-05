@@ -206,6 +206,32 @@ const projects = [
       ],
     },
   },
+  {
+    title: 'YouTube Channel Analysis',
+    company: 'Data Analysis Project',
+    description:
+      'Comprehensive data analysis project that examines YouTube channel performance, audience engagement patterns, and content optimization strategies. Uses advanced statistical modeling and machine learning to provide actionable insights for channel growth and monetization enhancement.',
+    tags: ['Python', 'Jupyter Notebook', 'Pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'Scikit-learn', 'YouTube API', 'Plotly', 'NLTK'],
+    video: '',
+    apk: '',
+    link: 'https://github.com/your-username/analyzing-youtube-channels',
+    github: 'https://github.com/your-username/analyzing-youtube-channels',
+    details: {
+      how: 'The analysis begins by connecting to the YouTube Data API to extract comprehensive channel metrics including subscriber growth, video performance, watch time, and engagement data. Data is processed using Pandas for cleaning and manipulation, then analyzed with statistical methods and machine learning algorithms. Interactive visualizations are created with Plotly and Matplotlib to identify patterns. The final output provides strategic recommendations for optimal posting times, content types, and growth strategies.',
+      frontend: [],
+      backend: [],
+      modules: [
+        { name: 'Data Collection', desc: 'YouTube API integration for real-time channel metrics, video statistics, and audience data extraction' },
+        { name: 'Data Processing', desc: 'Pandas-based data cleaning, transformation, and feature engineering for analysis-ready datasets' },
+        { name: 'Performance Analysis', desc: 'Statistical analysis of views, subscribers, watch time, and engagement metrics over time' },
+        { name: 'Audience Insights', desc: 'Demographic analysis, viewing patterns, geographic distribution, and retention analysis' },
+        { name: 'Content Strategy', desc: 'Video length optimization, thumbnail effectiveness, SEO performance, and topic analysis' },
+        { name: 'Predictive Modeling', desc: 'Machine learning models to forecast subscriber growth and content performance' },
+        { name: 'Interactive Dashboards', desc: 'Plotly-based visualizations for real-time performance monitoring and trend analysis' },
+        { name: 'Strategic Recommendations', desc: 'Actionable insights for upload scheduling, content optimization, and growth strategies' },
+      ],
+    },
+  },
 ]
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -336,10 +362,8 @@ export default function Projects() {
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 0.3 }}
         >
-          Built during professional experience — source code is confidential.
+          First 4 projects built during professional experience — source code confidential. Last 2 are personal projects.
         </motion.p>
-
-        <div className="projects-grid">
           {projects.map((project, i) => (
             <motion.div
               key={project.title}
