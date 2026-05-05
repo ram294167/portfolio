@@ -13,7 +13,6 @@ const projects = [
     tags: ['React Native', 'Node.js', 'Express', 'PostgreSQL', 'Firebase FCM', 'AWS S3', 'Google Maps', 'Google Auth'],
     video: '',
     apk: '/corefix-partner.apk',
-    comingSoon: true,
     details: {
       how: 'Employee opens app → goes Online (toggles availability) → GPS starts tracking location to backend in real time. When a nearby job is created, FCM sends a push notification → a modal pops with 30s countdown. Employee accepts → job lifecycle begins: Start → Navigate → Reach → OTP complete. After completion, earnings are added to wallet.',
       frontend: [
