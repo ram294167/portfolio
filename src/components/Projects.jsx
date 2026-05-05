@@ -381,7 +381,7 @@ export default function Projects() {
                   }}
                 >
                   <div className="thumb-placeholder">
-                    <span>{project.videos?.length > 1 ? 'Play Demo 1 or Demo 2' : 'Watch Demo Video'}</span>
+                    <span>{project.videos?.length > 1 ? 'Play Customer App Demo or Driver App Demo' : 'Watch Demo Video'}</span>
                   </div>
                   <div className="play-overlay"><FiPlay size={28} /></div>
                 </div>
@@ -425,15 +425,19 @@ export default function Projects() {
                   )}
                   {(project.video || project.videos) && project.video !== project.link && (
                     <>
-                      {(project.videos || [project.video]).map((videoUrl, idx) => (
-                        <button
-                          key={videoUrl}
-                          className="btn btn-primary"
-                          onClick={() => setActiveVideo(videoUrl)}
-                        >
-                          <FiPlay /> {project.videos?.length > 1 ? `Demo ${idx + 1}` : 'Watch Demo'}
-                        </button>
-                      ))}
+                      {(project.videos || [project.video]).map((video, idx) => {
+                        const videoUrl = typeof video === 'string' ? video : video.url
+                        const label = typeof video === 'string' ? (project.videos?.length > 1 ? `Demo ${idx + 1}` : 'Watch Demo') : video.label
+                        return (
+                          <button
+                            key={videoUrl}
+                            className="btn btn-primary"
+                            onClick={() => setActiveVideo(videoUrl)}
+                          >
+                            <FiPlay /> {label}
+                          </button>
+                        )
+                      })}
                     </>
                   )}
                   {project.apk && (
