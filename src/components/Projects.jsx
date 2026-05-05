@@ -9,7 +9,7 @@ const projects = [
     title: 'CoreFix Partner',
     company: 'CoreFix',
     description:
-      'Service professional app for mechanics, plumbers & electricians. Auth — login, Google Sign-In, OTP-based password reset. Jobs — receive nearby requests with 30s timer, full lifecycle (accept → navigate → OTP complete). Location — live GPS tracking, Google Maps navigation. Earnings — wallet, payment history, bank withdrawal. Documents — uploads via AWS S3. Notifications — real-time push via FCM. Note: demo not available publicly due to official release timing and privacy concerns.',
+      'Service professional app for mechanics, plumbers & electricians. Auth — login, Google Sign-In, OTP-based password reset. Jobs — receive nearby requests with 30s timer, full lifecycle (accept → navigate → OTP complete). Location — live GPS tracking, Google Maps navigation. Earnings — wallet, payment history, bank withdrawal. Documents — uploads via AWS S3. Notifications — real-time push via FCM.',
     tags: ['React Native', 'Node.js', 'Express', 'PostgreSQL', 'Firebase FCM', 'AWS S3', 'Google Maps', 'Google Auth'],
     video: '',
     apk: '/corefix-partner.apk',
