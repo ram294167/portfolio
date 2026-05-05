@@ -9,7 +9,7 @@ const projects = [
     title: 'CoreFix Partner',
     company: 'CoreFix',
     description:
-      'Service professional app for mechanics, plumbers & electricians. Auth — login, Google Sign-In, OTP-based password reset. Jobs — receive nearby requests with 30s timer, full lifecycle (accept → navigate → OTP complete). Location — live GPS tracking, Google Maps navigation. Earnings — wallet, payment history, bank withdrawal. Documents — uploads via AWS S3. Notifications — real-time push via FCM.',
+      'Service professional app for mechanics, plumbers & electricians. Auth — login, Google Sign-In, OTP-based password reset. Jobs — receive nearby requests with 30s timer, full lifecycle (accept → navigate → OTP complete). Location — live GPS tracking, Google Maps navigation. Earnings — wallet, payment history, bank withdrawal. Documents — uploads via AWS S3. Notifications — real-time push via FCM. Note: demo not available publicly due to official release timing and privacy concerns.',
     tags: ['React Native', 'Node.js', 'Express', 'PostgreSQL', 'Firebase FCM', 'AWS S3', 'Google Maps', 'Google Auth'],
     video: '',
     apk: '/corefix-partner.apk',
@@ -414,9 +414,14 @@ export default function Projects() {
                     </>
                   )}
                   {project.apk && (
-                    <a href={project.apk} download className="btn btn-outline">
-                      <FiDownload /> Download APK
-                    </a>
+                    <>
+                      <a href={project.apk} download className="btn btn-outline">
+                        <FiDownload /> Download APK
+                      </a>
+                      <div className="apk-warning">
+                        Official note: this APK is a client app that depends on backend servers. Login and live features may not work if the server is down or unavailable.
+                      </div>
+                    </>
                   )}
                 </div>
               </div>
@@ -500,6 +505,15 @@ export default function Projects() {
         }
         .project-links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: auto; }
         .project-links .btn { font-size: 0.85rem; padding: 9px 18px; }
+        .apk-warning {
+          margin-top: 10px;
+          color: var(--text-muted);
+          font-size: 0.78rem;
+          line-height: 1.5;
+          border-left: 3px solid rgba(249,115,22,0.75);
+          padding-left: 12px;
+          opacity: 0.85;
+        }
 
         /* Video Modal */
         .modal-overlay {
