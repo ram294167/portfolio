@@ -219,6 +219,10 @@ const projects = [
     link: 'https://e-commerce-zvc2-gktx26l0e-ram294167s-projects.vercel.app/',
     details: {
       how: 'Users can login, browse trending and category products, manage a cart with quantity controls, save delivery addresses, and checkout with payment proof upload. The app supports current location autofill for address entry, order tracking, and a responsive shopping experience. Test login credentials can be used to explore the live demo.',
+      credentials: {
+        email: 'test@gmail.com',
+        password: '1234'
+      },
       frontend: [
         { module: 'React', why: 'Component-driven user interface for shopping, cart, and checkout flows' },
         { module: 'Vite', why: 'Fast development and optimized production build' },
@@ -316,6 +320,16 @@ function DetailModal({ project, onClose }) {
           <span className="dm-label">How It Works</span>
           <p className="dm-text">{d.how}</p>
         </div>
+
+        {d.credentials && (
+          <div className="dm-section">
+            <span className="dm-label">Demo Credentials</span>
+            <div className="credential-box">
+              <p><strong>Email:</strong> {d.credentials.email}</p>
+              <p><strong>Password:</strong> {d.credentials.password}</p>
+            </div>
+          </div>
+        )}
 
         {/* Modules */}
         <div className="dm-section">
@@ -613,6 +627,16 @@ export default function Projects() {
           color: var(--accent2); margin-bottom: 10px;
         }
         .dm-text { font-size: 0.88rem; color: var(--text-muted); line-height: 1.75; }
+        .credential-box {
+          background: rgba(255,255,255,0.06);
+          border: 1px solid rgba(255,255,255,0.12);
+          border-radius: 12px;
+          padding: 16px;
+          color: var(--text);
+          font-size: 0.95rem;
+          line-height: 1.6;
+        }
+        .credential-box strong { color: var(--text); }
         .dm-grid { display: flex; flex-direction: column; gap: 8px; }
         .dm-item {
           display: flex; gap: 10px; align-items: flex-start;

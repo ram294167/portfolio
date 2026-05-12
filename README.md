@@ -9,6 +9,10 @@ Welcome to my portfolio! Here you'll find a collection of my projects showcasing
 
 A responsive full-stack shopping platform built with React, Vite, Node.js, Express, and PostgreSQL. Users can login, browse products, manage cart quantities, save delivery addresses, track orders, and checkout with payment proof.
 
+**Demo login credentials:**
+- Email: `test@gmail.com`
+- Password: `1234`
+
 #### How It Works:
 1. **User Authentication** - Login and account management.
 2. **Product Catalog** - Browse trending, sale, and category-based products.
