@@ -4,6 +4,36 @@ Welcome to my portfolio! Here you'll find a collection of my projects showcasing
 
 ## Projects
 
+### ShopHub E-Commerce Store
+**Link:** [https://e-commerce-zvc2-gktx26l0e-ram294167s-projects.vercel.app/](https://e-commerce-zvc2-gktx26l0e-ram294167s-projects.vercel.app/)
+
+A responsive full-stack shopping platform built with React, Vite, Node.js, Express, and PostgreSQL. Users can login, browse products, manage cart quantities, save delivery addresses, track orders, and checkout with payment proof.
+
+#### How It Works:
+1. **User Authentication** - Login and account management.
+2. **Product Catalog** - Browse trending, sale, and category-based products.
+3. **Cart Management** - Add/remove items, update quantity with modern controls.
+4. **Saved Addresses** - Keep delivery addresses saved for faster checkout.
+5. **Order Tracking** - View previous orders and order status.
+6. **Live Payment Proof Upload** - Upload payment screenshot during checkout.
+7. **Responsive UI** - Mobile-friendly shopping experience.
+
+#### Technologies Used:
+- **Frontend:** React, Vite, CSS
+- **Backend:** Node.js, Express
+- **Database:** PostgreSQL
+- **Hosting:** Vercel
+
+#### Features:
+- ✅ Login and registration
+- ✅ Shopping cart with quantity controls
+- ✅ Saved delivery addresses
+- ✅ Order tracking and history
+- ✅ Live deployed website
+- ✅ Fully responsive design
+
+---
+
 ### Invoice Generator
 **Link:** [https://invoice-generator-hioi.vercel.app/](https://invoice-generator-hioi.vercel.app/)
 

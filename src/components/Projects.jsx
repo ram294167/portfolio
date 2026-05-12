@@ -209,6 +209,39 @@ const projects = [
     },
   },
   {
+    title: 'ShopHub E-Commerce Store',
+    company: 'Personal Project',
+    description:
+      'A live deployed full-stack e-commerce platform with login, cart, saved addresses, order tracking, and payment proof upload. Built with React, Node.js, Express, and PostgreSQL, it is fully responsive for desktop and mobile shopping.',
+    tags: ['React', 'Vite', 'Node.js', 'Express', 'PostgreSQL', 'Responsive UI', 'Geolocation'],
+    video: '',
+    apk: '',
+    link: 'https://e-commerce-zvc2-gktx26l0e-ram294167s-projects.vercel.app/',
+    details: {
+      how: 'Users can login, browse trending and category products, manage a cart with quantity controls, save delivery addresses, and checkout with payment proof upload. The app supports current location autofill for address entry, order tracking, and a responsive shopping experience. Test login credentials can be used to explore the live demo.',
+      frontend: [
+        { module: 'React', why: 'Component-driven user interface for shopping, cart, and checkout flows' },
+        { module: 'Vite', why: 'Fast development and optimized production build' },
+        { module: 'CSS Grid', why: 'Responsive product and cart layouts across screen sizes' },
+        { module: 'Axios', why: 'API communication for products, cart, orders, and addresses' },
+        { module: 'Browser Geolocation', why: 'Detect current location to speed up address entry during checkout' },
+      ],
+      backend: [
+        { module: 'Node.js + Express', why: 'REST API backend handling products, cart, orders, addresses, and authentication' },
+        { module: 'PostgreSQL', why: 'Relational database for users, products, cart, orders, addresses, and payments' },
+        { module: 'Multer', why: 'Handle payment proof file uploads securely on the server' },
+        { module: 'Bcrypt', why: 'Secure password hashing for user accounts' },
+      ],
+      modules: [
+        { name: 'Authentication', desc: 'Login with saved session and secure password hashing' },
+        { name: 'Product Catalog', desc: 'Browse products by category, trending items, and search results' },
+        { name: 'Cart', desc: 'Add, remove, and update product quantities with better controls' },
+        { name: 'Checkout', desc: 'Save addresses or use current location, then submit payment proof' },
+        { name: 'Order Tracking', desc: 'View past orders, status, and delivery information' },
+      ],
+    },
+  },
+  {
     title: 'YouTube Channel Analysis',
     company: 'Data Analysis Project',
     description:
@@ -365,7 +398,7 @@ export default function Projects() {
           animate={inView ? { opacity: 1 } : {}}
           transition={{ delay: 0.3 }}
         >
-          First 4 projects built during professional experience — source code confidential. Last 2 are personal projects.
+          First 4 projects built during professional experience — source code confidential. Last 3 are personal projects.
         </motion.p>
         <div className="projects-grid">
           {projects.map((project, i) => (
