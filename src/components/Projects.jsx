@@ -49,7 +49,7 @@ const projects = [
     description:
       'Web-based admin dashboard for the CoreFix platform. Manages employees, jobs, payments, AMC contracts, services, offers, taxes, and push notifications. Role-based access control per staff member. Source code and live access are confidential.',
     tags: ['React', 'Node.js', 'Express', 'PostgreSQL', 'FCM', 'AWS S3', 'REST API'],
-    video: '',
+    video: '/vega/corefix/demo.m4v',
     apk: '',
     comingSoon: true,
     details: {
@@ -283,7 +283,7 @@ function toEmbedUrl(url) {
 
 function VideoModal({ url, onClose }) {
   const embed = toEmbedUrl(url)
-  const isVideo = url.endsWith('.mp4') || url.endsWith('.webm')
+  const isVideo = url.endsWith('.mp4') || url.endsWith('.webm') || url.endsWith('.m4v')
   return (
     <motion.div className="modal-overlay" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onClick={onClose}>
       <motion.div className="modal-box" initial={{ scale: 0.85, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} onClick={e => e.stopPropagation()}>
