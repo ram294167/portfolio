@@ -51,7 +51,6 @@ const projects = [
     tags: ['React', 'Node.js', 'Express', 'PostgreSQL', 'FCM', 'AWS S3', 'REST API'],
     video: '/vega/corefix/demo.m4v',
     apk: '',
-    comingSoon: true,
     details: {
       how: 'Admin logs in → accesses role-restricted modules based on permissions. Each module talks to the Node.js/Express REST API. Data is stored in PostgreSQL. Documents and images go to AWS S3. Push notifications are sent via Firebase FCM to employees or customers. Staff access is controlled per menu item through an RBAC system.',
       frontend: [
@@ -459,28 +458,25 @@ export default function Projects() {
                       <FiPlay /> Visit Project
                     </a>
                   )}
+                  {((project.video && project.video !== project.link) || project.videos) && (
+                    (project.videos || [project.video]).map((video, idx) => {
+                      const videoUrl = typeof video === 'string' ? video : video.url
+                      const label = typeof video === 'string' ? (project.videos?.length > 1 ? `Demo ${idx + 1}` : 'Watch Demo') : video.label
+                      return (
+                        <button
+                          key={videoUrl}
+                          className="btn btn-primary"
+                          onClick={() => setActiveVideo(videoUrl)}
+                        >
+                          <FiPlay /> {label}
+                        </button>
+                      )
+                    })
+                  )}
                   {project.details && (
                     <button className="btn btn-primary" onClick={() => setActiveDetail(project)}>
                       <FiInfo /> View Details
                     </button>
-                  )}
-                  {((project.video && project.video !== project.link) || project.videos) && (
-                    <div className="project-demo-buttons">
-                      <span className="demo-label">Video Demos:</span>
-                      {(project.videos || [project.video]).map((video, idx) => {
-                        const videoUrl = typeof video === 'string' ? video : video.url
-                        const label = typeof video === 'string' ? (project.videos?.length > 1 ? `Demo ${idx + 1}` : 'Watch Demo') : video.label
-                        return (
-                          <button
-                            key={videoUrl}
-                            className="btn btn-primary"
-                            onClick={() => setActiveVideo(videoUrl)}
-                          >
-                            <FiPlay /> {label}
-                          </button>
-                        )
-                      })}
-                    </div>
                   )}
                   {project.apk && (
                     <>
