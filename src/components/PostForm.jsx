@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { useState, useRef } from 'react'
-import { FiUpload, FiMic, FiX, FiImage, FiVideo, FiAudio } from 'react-icons/fi'
+import { FiUpload, FiMic, FiX, FiImage, FiVideo } from 'react-icons/fi'
 import { MdCheckCircle } from 'react-icons/md'
 import '../styles/post-form.css'
 
