@@ -216,6 +216,7 @@ const projects = [
     video: '',
     apk: '',
     link: 'https://e-commerce-zvc2-gktx26l0e-ram294167s-projects.vercel.app/',
+    hideThumbPlaceholder: true,
     details: {
       how: 'Users can login, browse trending and category products, manage a cart with quantity controls, save delivery addresses, and checkout with payment proof upload. The app supports current location autofill for address entry, order tracking, and a responsive shopping experience. Test login credentials can be used to explore the live demo.',
       credentials: {
@@ -423,7 +424,7 @@ export default function Projects() {
               transition={{ delay: i * 0.15, duration: 0.6 }}
               whileHover={{ y: -6 }}
             >
-              {!((project.video && [project.video]) || project.videos)?.length && (
+              {!((project.video && [project.video]) || project.videos)?.length && !project.hideThumbPlaceholder && (
                 project.comingSoon ? (
                   <div className="thumb-placeholder">
                     <span>Coming Soon...</span>
@@ -550,7 +551,7 @@ export default function Projects() {
         }
         .thumb-placeholder span { color: var(--text-muted); font-size: 0.85rem; font-weight: 500; letter-spacing: 1px; }
 
-        .project-body { padding: 22px 24px; display: flex; flex-direction: column; gap: 14px; flex: 1; }
+        .project-body { padding: 22px 24px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
         .project-meta { display: flex; flex-direction: column; gap: 4px; }
         .project-card h3 { font-size: 1.15rem; font-weight: 700; color: var(--text); }
         .coming-soon-badge {
@@ -568,7 +569,7 @@ export default function Projects() {
           border: 1px solid rgba(124,58,237,0.25);
           padding: 4px 11px; border-radius: 20px; font-size: 0.78rem; font-weight: 600;
         }
-        .project-links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: auto; }
+        .project-links { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 0; }
         .project-links .btn { font-size: 0.85rem; padding: 9px 18px; }
         .project-demo-buttons { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-top: 6px; }
         .demo-label { color: var(--text-muted); font-size: 0.82rem; font-weight: 700; margin-right: 8px; white-space: nowrap; }
