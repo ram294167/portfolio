@@ -3,6 +3,7 @@ import Hero from './components/Hero'
 import About from './components/About'
 import TechStack from './components/TechStack'
 import Projects from './components/Projects'
+import Blog from './components/Blog'
 import Contact from './components/Contact'
 import './styles/global.css'
 
@@ -15,6 +16,7 @@ function App() {
         <About />
         <TechStack />
         <Projects />
+        <Blog />
         <Contact />
       </main>
     </div>

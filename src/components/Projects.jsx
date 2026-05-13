@@ -246,6 +246,37 @@ const projects = [
     },
   },
   {
+    title: 'Blog Platform',
+    company: 'Personal Project',
+    description:
+      'Modern blog platform deployed on Vercel with rich media support for images, video, and audio uploads. Readers can browse posts, open detailed views, and enjoy a responsive article reading experience.',
+    tags: ['Next.js', 'React', 'Supabase', 'MongoDB', 'Node.js', 'Vercel', 'Responsive'],
+    video: '',
+    apk: '',
+    link: 'https://blog-p42utdvzu-ram294167s-projects.vercel.app/',
+    details: {
+      how: 'Authors can create blog posts with titles, text, and attached media. Uploaded assets are stored in Supabase storage, while post metadata is persisted in MongoDB. The live version on Vercel renders a clean feed, image modal previews, and detailed post pages with embedded media playback.',
+      frontend: [
+        { module: 'Next.js App Router', why: 'Modern page routing with server and client components for fast rendering' },
+        { module: 'React Hooks', why: 'Client-side state for modals, file previews, and interactive post creation' },
+        { module: 'Supabase Storage', why: 'Store and serve image, video, and audio uploads from the web app' },
+        { module: 'Responsive CSS', why: 'Mobile-first layout for blog reading and media display across devices' },
+      ],
+      backend: [
+        { module: 'Node.js', why: 'API routes handle media upload and post creation' },
+        { module: 'MongoDB', why: 'Persist blog posts, author data, and media metadata' },
+        { module: 'Supabase API', why: 'Upload files and generate public URLs for rich media content' },
+      ],
+      modules: [
+        { name: 'Post Creation', desc: 'Create posts with title, text, and optional image/video/audio attachments' },
+        { name: 'Media Upload', desc: 'Upload files to Supabase storage and show upload progress with validation' },
+        { name: 'Responsive Feed', desc: 'Render a feed of blog posts with media previews and read-more navigation' },
+        { name: 'Detail View', desc: 'Open full post details with embedded media playback and image modal' },
+        { name: 'Vercel Deployment', desc: 'Live hosted project with fast CDN delivery and automatic builds' },
+      ],
+    },
+  },
+  {
     title: 'YouTube Channel Analysis',
     company: 'Data Analysis Project',
     description:
