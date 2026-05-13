@@ -83,7 +83,7 @@ export default function Hero() {
             <a href="#projects" className="btn btn-outline">
               View My Work <FiArrowDown />
             </a>
-            <a href="/ram_resume_updated (1).pdf" download className="btn btn-outline">
+            <a href="/rama_prakash_ch__.pdf" download className="btn btn-outline">
               <FiDownload /> Resume
             </a>
             <button className="btn btn-outline" onClick={() => setShowResume(true)}>
@@ -150,13 +150,13 @@ export default function Hero() {
               <div className="resume-modal-header">
                 <span>Resume</span>
                 <div style={{ display: 'flex', gap: 10 }}>
-                  <a href="/ram_resume_updated (1).pdf" download className="btn btn-outline" style={{ fontSize: '0.8rem', padding: '6px 14px' }}>
+                  <a href="/rama_prakash_ch__.pdf" download className="btn btn-outline" style={{ fontSize: '0.8rem', padding: '6px 14px' }}>
                     <FiDownload /> Download
                   </a>
                   <button className="resume-close" onClick={() => setShowResume(false)}><FiX /></button>
                 </div>
               </div>
-              <iframe src="/ram_resume_updated (1).pdf#zoom=105" className="resume-frame" title="Resume" />
+              <iframe src="/rama_prakash_ch__.pdf#zoom=105" className="resume-frame" title="Resume" />
             </motion.div>
           </motion.div>
         )}
